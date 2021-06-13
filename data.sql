@@ -1,4 +1,4 @@
-USE CustomerLib_Opishniak_R
+USE customer_lib_Opishniak_R
 
 GO
 
@@ -9,28 +9,28 @@ GO
 --With all fields
 
 
-INSERT INTO [dbo].Customers (FirstName, LastName, CustomerPhoneNumber, CustomerEmail, totalPurchaseAmount)
+INSERT INTO [dbo].customer (first_name, last_name, customer_phone_number, customer_email, total_purchase_amount)
 VALUES('John', 'Doe', '7054756961', 'jd@mail.hg', 1000);
 
 GO
 
 --Without optional First Name
 
-INSERT INTO [dbo].Customers (LastName, CustomerPhoneNumber, CustomerEmail, totalPurchaseAmount)
+INSERT INTO [dbo].customer (last_name, customer_phone_number, customer_email, total_purchase_amount)
 VALUES('Snow', '7054756961', 'jd@mail.hg', 1000);
 
 GO
 
 --Without optional phone number
 
-INSERT INTO [dbo].Customers (FirstName, LastName, CustomerEmail, totalPurchaseAmount)
+INSERT INTO [dbo].customer (first_name, last_name, customer_email, total_purchase_amount)
 VALUES('John', 'Stark', 'jd@mail.hg', 1000);
 
 GO
 
 --Without optional email 
 
-INSERT INTO [dbo].Customers (FirstName, LastName, CustomerPhoneNumber, totalPurchaseAmount)
+INSERT INTO [dbo].customer (first_name, last_name, customer_phone_number, total_purchase_amount)
 VALUES('John', 'Flowers', '7054756961', 1000);
 
 GO
@@ -43,25 +43,25 @@ GO
 
 --With all fields
 
-INSERT INTO [dbo].Addresses(AddressLine, AddressLine2, AddressType, City, PostalCode, [State], Country, CustomerID)
-VALUES ('Street3', 'House3', 'Billing', 'City3', '123438', 'LA', 'USA',
-(SELECT TOP 1[dbo].Customers.CustomerID FROM [dbo].Customers WHERE [dbo].Customers.LastName = 'Doe'));
+INSERT INTO [dbo].customer_address(address_line, address_line2, address_type, city, postal_code, [state], country, customer_id)
+VALUES ('Street3', 'House3', 'Billing', 'city3', '123438', 'LA', 'USA',
+(SELECT TOP 1[dbo].customer.customer_id FROM [dbo].customer WHERE [dbo].customer.last_name = 'Doe'));
 
 GO
 
 --Without optional address line 2
 
-INSERT INTO [dbo].Addresses(AddressLine, AddressType, City, PostalCode, [State], Country, CustomerID)
-VALUES ('Street3', 'Billing', 'City3', '123438', 'LA', 'USA',
-(SELECT TOP 1 [dbo].Customers.CustomerID FROM [dbo].Customers WHERE [dbo].Customers.LastName = 'Doe'));
+INSERT INTO [dbo].customer_address(address_line, address_type, city, postal_code, [state], country, customer_id)
+VALUES ('Street3', 'Billing', 'city3', '123438', 'LA', 'USA',
+(SELECT TOP 1 [dbo].customer.customer_id FROM [dbo].customer WHERE [dbo].customer.last_name = 'Doe'));
 
 GO
 
 --Notes
 
-INSERT INTO [dbo].Notes (Note, CustomerID)
+INSERT INTO [dbo].Notes (Note, customer_id)
 VALUES ('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-(SELECT TOP 1 [dbo].Customers.CustomerID FROM [dbo].Customers WHERE [dbo].Customers.LastName = 'Doe'));
+(SELECT TOP 1 [dbo].customer.customer_id FROM [dbo].customer WHERE [dbo].customer.last_name = 'Doe'));
 
 GO
 
@@ -73,7 +73,7 @@ GO
 
 --First name is too long
 
-INSERT INTO [dbo].Customers (FirstName, LastName, CustomerPhoneNumber, CustomerEmail, totalPurchaseAmount)
+INSERT INTO [dbo].customer (first_name, last_name, customer_phone_number, customer_email, total_purchase_amount)
 VALUES('JohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohn', 
 'Doe', '7054756961', 'jd@mail.hg', 1000);
 
@@ -81,14 +81,14 @@ GO
 
 --Without Last name
 
-INSERT INTO [dbo].Customers (FirstName, CustomerPhoneNumber, CustomerEmail, totalPurchaseAmount)
+INSERT INTO [dbo].customer (first_name, customer_phone_number, customer_email, total_purchase_amount)
 VALUES('John', '7054756961', 'jd@mail.hg', 1000);
 
 GO
 
 --Last Name is too long 
 
-INSERT INTO [dbo].Customers (FirstName, LastName, CustomerPhoneNumber, CustomerEmail, totalPurchaseAmount)
+INSERT INTO [dbo].customer (first_name, last_name, customer_phone_number, customer_email, total_purchase_amount)
 VALUES('John', 'DoeDoeDoeDoeDoeDoeDoeDoeDoeDoeDoeDoeDoeDoeDoeDoeDoeDoeDoeDoeDoeDoeDoeDoeDoeDoeDoeDoeDoeDoe', 
 '7054756961', 'jd@mail.hg', 1000);
 
@@ -96,21 +96,21 @@ GO
 
 --Wrong phone number format
 
-INSERT INTO [dbo].Customers (FirstName, LastName, CustomerPhoneNumber, CustomerEmail, totalPurchaseAmount)
+INSERT INTO [dbo].customer (first_name, last_name, customer_phone_number, customer_email, total_purchase_amount)
 VALUES('John', 'Doe', '70547-56961', 'jd@mail.hg', 1000);
 
 GO
 
 --Wrong email format
 
-INSERT INTO [dbo].Customers (FirstName, LastName, CustomerPhoneNumber, CustomerEmail, totalPurchaseAmount)
+INSERT INTO [dbo].customer (first_name, last_name, customer_phone_number, customer_email, total_purchase_amount)
 VALUES('John', 'Doe', '7054756961', 'jdmail.hg', 1000);
 
 GO
 
 --Wrong money type
 
-INSERT INTO [dbo].Customers (FirstName, LastName, CustomerPhoneNumber, CustomerEmail, totalPurchaseAmount)
+INSERT INTO [dbo].customer (first_name, last_name, customer_phone_number, customer_email, total_purchase_amount)
 VALUES('John', 'Doe', '7054756961', 'jd@mail.hg', 'money');
 
 GO
@@ -123,106 +123,106 @@ GO
 
 --CustomerId is wrong
 
-INSERT INTO [dbo].Addresses(AddressLine, AddressLine2, AddressType, City, PostalCode, [State], Country, CustomerID)
-VALUES ('Street3', 'House3', 'Billing', 'City3', '123438', 'LA', 'USA', 10);
+INSERT INTO [dbo].customer_address(address_line, address_line2, address_type, city, postal_code, [state], country, customer_id)
+VALUES ('Street3', 'House3', 'Billing', 'city3', '123438', 'LA', 'USA', 10);
 
 GO
 
 --Address line is empty
 
-INSERT INTO [dbo].Addresses (AddressLine, AddressLine2, AddressType, City, PostalCode, [State], Country, CustomerID)
-VALUES ('Street', 'House3', 'Billing', 'City3', '123438', 'LA', 'USA',
-(SELECT TOP 1 [dbo].Customers.CustomerID FROM [dbo].Customers WHERE [dbo].Customers.LastName = 'Doe'));
+INSERT INTO [dbo].customer_address (address_line, address_line2, address_type, city, postal_code, [state], country, customer_id)
+VALUES ('Street', 'House3', 'Billing', 'city3', '123438', 'LA', 'USA',
+(SELECT TOP 1 [dbo].customer.customer_id FROM [dbo].customer WHERE [dbo].customer.last_name = 'Doe'));
 
 GO
 
 --Address line is too long
 
-INSERT INTO [dbo].Addresses (AddressLine, AddressLine2, AddressType, City, PostalCode, [State], Country, CustomerID)
+INSERT INTO [dbo].customer_address (address_line, address_line2, address_type, city, postal_code, [state], country, customer_id)
 VALUES ('StreetStreetStreetStreetStreetStreetStreetStreetStreetStreetStreetStreetStreetStreetStreetStreetStreetStreetStreetStreetStreetStreetStreetStreetStreetStreetStreetStreetStreetStreet', 
-'House3', 'Billing', 'City3', '123438', 'LA', 'USA',
-(SELECT TOP 1 [dbo].Customers.CustomerID FROM [dbo].Customers WHERE [dbo].Customers.LastName = 'Doe'));
+'House3', 'Billing', 'city3', '123438', 'LA', 'USA',
+(SELECT TOP 1 [dbo].customer.customer_id FROM [dbo].customer WHERE [dbo].customer.last_name = 'Doe'));
 
 GO
 
 --Address line 2 is too long
 
-INSERT INTO [dbo].Addresses (AddressLine, AddressLine2, AddressType, City, PostalCode, [State], Country, CustomerID)
+INSERT INTO [dbo].customer_address (address_line, address_line2, address_type, city, postal_code, [state], country, customer_id)
 VALUES ('Street', 'House3House3House3House3House3House3House3House3House3House3House3House3House3House3House3House3House3House3House3House3House3House3House3House3House3House3House3', 
-'Billing', 'City3', '123438', 'LA', 'USA',
-(SELECT TOP 1 [dbo].Customers.CustomerID FROM [dbo].Customers WHERE [dbo].Customers.LastName = 'Doe'));
+'Billing', 'city3', '123438', 'LA', 'USA',
+(SELECT TOP 1 [dbo].customer.customer_id FROM [dbo].customer WHERE [dbo].customer.last_name = 'Doe'));
 
 GO
 
 --Address type with wrong option
 
-INSERT INTO [dbo].Addresses(AddressLine, AddressLine2, AddressType, City, PostalCode, [State], Country, CustomerID)
-VALUES ('Street3', 'House3', 'Selling', 'City3', '123438', 'LA', 'USA',
-(SELECT TOP 1 [dbo].Customers.CustomerID FROM [dbo].Customers WHERE [dbo].Customers.LastName = 'Doe'));
+INSERT INTO [dbo].customer_address(address_line, address_line2, address_type, city, postal_code, [state], country, customer_id)
+VALUES ('Street3', 'House3', 'Selling', 'city3', '123438', 'LA', 'USA',
+(SELECT TOP 1 [dbo].customer.customer_id FROM [dbo].customer WHERE [dbo].customer.last_name = 'Doe'));
 
 GO
 
 --Without city 
 
-INSERT INTO [dbo].Addresses(AddressLine, AddressLine2, AddressType, PostalCode, [State], Country, CustomerID)
+INSERT INTO [dbo].customer_address(address_line, address_line2, address_type, postal_code, [state], country, customer_id)
 VALUES ('Street3', 'House3', 'Billing', '123438', 'LA', 'USA',
-(SELECT TOP 1 [dbo].Customers.CustomerID FROM [dbo].Customers WHERE [dbo].Customers.LastName = 'Doe'));
+(SELECT TOP 1 [dbo].customer.customer_id FROM [dbo].customer WHERE [dbo].customer.last_name = 'Doe'));
 
 GO
 
---City name is too long 
+--city name is too long 
 
-INSERT INTO [dbo].Addresses(AddressLine, AddressLine2, AddressType, City, PostalCode, [State], Country, CustomerID)
-VALUES ('Street3', 'House3', 'Billing', 'City3City3City3City3City3City3City3City3City3City3City3', '123438', 'LA', 'USA',
-(SELECT TOP 1 [dbo].Customers.CustomerID FROM [dbo].Customers WHERE [dbo].Customers.LastName = 'Doe'));
+INSERT INTO [dbo].customer_address(address_line, address_line2, address_type, city, postal_code, [state], country, customer_id)
+VALUES ('Street3', 'House3', 'Billing', 'city3city3city3city3city3city3city3city3city3city3city3', '123438', 'LA', 'USA',
+(SELECT TOP 1 [dbo].customer.customer_id FROM [dbo].customer WHERE [dbo].customer.last_name = 'Doe'));
 
 GO
 
 --Without postal code
 
-INSERT INTO [dbo].Addresses(AddressLine, AddressLine2, AddressType, City, [State], Country, CustomerID)
-VALUES ('Street3', 'House3', 'Billing', 'City3', 'LA', 'USA',
-(SELECT TOP 1 [dbo].Customers.CustomerID FROM [dbo].Customers WHERE [dbo].Customers.LastName = 'Doe'));
+INSERT INTO [dbo].customer_address(address_line, address_line2, address_type, city, [state], country, customer_id)
+VALUES ('Street3', 'House3', 'Billing', 'city3', 'LA', 'USA',
+(SELECT TOP 1 [dbo].customer.customer_id FROM [dbo].customer WHERE [dbo].customer.last_name = 'Doe'));
 
 GO
 
 --Postal code is too long
 
-INSERT INTO [dbo].Addresses(AddressLine, AddressLine2, AddressType, City, PostalCode, [State], Country, CustomerID)
-VALUES ('Street3', 'House3', 'Billing', 'City3', '123438111111', 'LA', 'USA',
-(SELECT TOP 1 [dbo].Customers.CustomerID FROM [dbo].Customers WHERE [dbo].Customers.LastName = 'Doe'));
+INSERT INTO [dbo].customer_address(address_line, address_line2, address_type, city, postal_code, [state], country, customer_id)
+VALUES ('Street3', 'House3', 'Billing', 'city3', '123438111111', 'LA', 'USA',
+(SELECT TOP 1 [dbo].customer.customer_id FROM [dbo].customer WHERE [dbo].customer.last_name = 'Doe'));
 
 GO
 
 ---Without state
 
-INSERT INTO [dbo].Addresses(AddressLine, AddressLine2, AddressType, City, PostalCode, Country, CustomerID)
-VALUES ('Street3', 'House3', 'Billing', 'City3', '123438', 'USA',
-(SELECT TOP 1 [dbo].Customers.CustomerID FROM [dbo].Customers WHERE [dbo].Customers.LastName = 'Doe'));
+INSERT INTO [dbo].customer_address(address_line, address_line2, address_type, city, postal_code, country, customer_id)
+VALUES ('Street3', 'House3', 'Billing', 'city3', '123438', 'USA',
+(SELECT TOP 1 [dbo].customer.customer_id FROM [dbo].customer WHERE [dbo].customer.last_name = 'Doe'));
 
 GO
 
 --State name is too long
 
-INSERT INTO [dbo].Addresses(AddressLine, AddressLine2, AddressType, City, PostalCode, [State], Country, CustomerID)
-VALUES ('Street3', 'House3', 'Billing', 'City3', '123438', 'LALALALALALALALALALALALALALALALALALALALA', 'USA',
-(SELECT TOP 1 [dbo].Customers.CustomerID FROM [dbo].Customers WHERE [dbo].Customers.LastName = 'Doe'));
+INSERT INTO [dbo].customer_address(address_line, address_line2, address_type, city, postal_code, [state], country, customer_id)
+VALUES ('Street3', 'House3', 'Billing', 'city3', '123438', 'LALALALALALALALALALALALALALALALALALALALA', 'USA',
+(SELECT TOP 1 [dbo].customer.customer_id FROM [dbo].customer WHERE [dbo].customer.last_name = 'Doe'));
 
 GO
 
 --Without country
 
-INSERT INTO [dbo].Addresses(AddressLine, AddressLine2, AddressType, City, PostalCode, [State], CustomerID)
-VALUES ('Street3', 'House3', 'Billing', 'City3', '123438', 'LA',
-(SELECT TOP 1 [dbo].Customers.CustomerID FROM [dbo].Customers WHERE [dbo].Customers.LastName = 'Doe'));
+INSERT INTO [dbo].customer_address(address_line, address_line2, address_type, city, postal_code, [state], customer_id)
+VALUES ('Street3', 'House3', 'Billing', 'city3', '123438', 'LA',
+(SELECT TOP 1 [dbo].customer.customer_id FROM [dbo].customer WHERE [dbo].customer.last_name = 'Doe'));
 
 GO
 
 --With wrong country
 
-INSERT INTO [dbo].Addresses(AddressLine, AddressLine2, AddressType, City, PostalCode, [State], Country, CustomerID)
-VALUES ('Street3', 'House3', 'Billing', 'City3', '123438', 'LA', 'Japan',
-(SELECT TOP 1 [dbo].Customers.CustomerID FROM [dbo].Customers WHERE [dbo].Customers.LastName = 'Doe'));
+INSERT INTO [dbo].customer_address(address_line, address_line2, address_type, city, postal_code, [state], country, customer_id)
+VALUES ('Street3', 'House3', 'Billing', 'city3', '123438', 'LA', 'Japan',
+(SELECT TOP 1 [dbo].customer.customer_id FROM [dbo].customer WHERE [dbo].customer.last_name = 'Doe'));
 
 GO
 
@@ -234,14 +234,14 @@ GO
 --Note is empty
 
 
-INSERT INTO [dbo].Notes (CustomerID)
-VALUES ((SELECT TOP 1 [dbo].Customers.CustomerID FROM [dbo].Customers WHERE [dbo].Customers.LastName = 'Doe'));
+INSERT INTO [dbo].customer_note (customer_id)
+VALUES ((SELECT TOP 1 [dbo].customer.customer_id FROM [dbo].customer WHERE [dbo].customer.last_name = 'Doe'));
 
 GO
 
 --Incorrect CustomerId
 
-INSERT INTO [dbo].Notes (Note, CustomerID)
+INSERT INTO [dbo].customer_note (note, customer_id)
 VALUES ('Lorem ipsum sit ameth', 10);
 
 GO
