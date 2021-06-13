@@ -57,9 +57,9 @@ VALUES ('Street3', 'Billing', 'city3', '123438', 'LA', 'USA',
 
 GO
 
---Notes
+--customer_note
 
-INSERT INTO [dbo].Notes (Note, customer_id)
+INSERT INTO [dbo].customer_note (Note, customer_id)
 VALUES ('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
 (SELECT TOP 1 [dbo].customer.customer_id FROM [dbo].customer WHERE [dbo].customer.last_name = 'Doe'));
 
@@ -130,8 +130,8 @@ GO
 
 --Address line is empty
 
-INSERT INTO [dbo].customer_address (address_line, address_line2, address_type, city, postal_code, [state], country, customer_id)
-VALUES ('Street', 'House3', 'Billing', 'city3', '123438', 'LA', 'USA',
+INSERT INTO [dbo].customer_address (address_line2, address_type, city, postal_code, [state], country, customer_id)
+VALUES ('House3', 'Billing', 'city3', '123438', 'LA', 'USA',
 (SELECT TOP 1 [dbo].customer.customer_id FROM [dbo].customer WHERE [dbo].customer.last_name = 'Doe'));
 
 GO
@@ -229,7 +229,7 @@ GO
 
 --Incorrect data 
 
---Notes table
+--customer_note table
 
 --Note is empty
 

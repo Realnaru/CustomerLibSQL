@@ -10,8 +10,8 @@ CREATE TABLE [dbo].customer (
 customer_id int IDENTITY(1,1) NOT NULL CONSTRAINT pk_cutomer_id PRIMARY KEY,
 first_name nvarchar(50) NULL CHECK (LEN(first_name) <= 50),
 last_name nvarchar(50) NOT NULL CHECK (LEN(last_name) <= 50),
-customer_phoneNumber varchar(15) NULL CONSTRAINT ck_customer_phoneNumber 
-	CHECK(LEN(customer_phoneNumber) <= 15 AND customer_phoneNumber NOT LIKE '%[^0-9]%'),
+customer_phone_number varchar(15) NULL CONSTRAINT ck_customer_phone_number 
+	CHECK(LEN(customer_phone_number) <= 15 AND customer_phone_number NOT LIKE '%[^0-9]%'),
 customer_email nvarchar(100) NULL CONSTRAINT ck_customer_email CHECK(customer_email LIKE '%_@__%.__%'),
 total_purchase_amount money NULL
 );
