@@ -2,6 +2,10 @@ USE customer_lib_Opishniak_R
 
 GO
 
+USE customer_lib_Opishniak_R
+
+GO
+
 CREATE PROCEDURE [dbo].[customer_select]
 
 @customer_id int

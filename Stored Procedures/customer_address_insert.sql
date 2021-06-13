@@ -1,3 +1,7 @@
+USE customer_lib_Opishniak_R
+
+GO
+
 CREATE PROCEDURE [dbo].[customer_address_insert]
 
 @customer_id int,

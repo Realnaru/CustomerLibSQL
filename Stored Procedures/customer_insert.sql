@@ -1,3 +1,7 @@
+USE customer_lib_Opishniak_R
+
+GO
+
 CREATE PROCEDURE [dbo].[customer_insert] 
 
 @first_name nvarchar(50),

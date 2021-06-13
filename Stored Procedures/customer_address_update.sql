@@ -1,3 +1,7 @@
+USE customer_lib_Opishniak_R
+
+GO
+
 CREATE PROCEDURE [dbo].[customer_address_update]
 
 @address_id int,
